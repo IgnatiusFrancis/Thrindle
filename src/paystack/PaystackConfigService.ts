@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { FundWalletDto } from 'src/wallet/dto/create-wallet.dto';
+import { FundWalletDto } from '../wallet/dto/create-wallet.dto';
 
 const Paystack = require('paystack');
 

@@ -1,20 +1,10 @@
-import {
-  ConflictException,
-  ForbiddenException,
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
-//import { prismaService } from 'src/Repository/repository.service';
-import { v4 as uuidv4 } from 'uuid';
+import { Injectable } from '@nestjs/common';
 
-import { NotFoundError } from 'rxjs';
-//import { PayStackService } from 'src/paystack/payStack.service';
+import { v4 as uuidv4 } from 'uuid';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { PrismaService } from 'src/utils/prisma';
+import { PrismaService } from '../utils/prisma';
 import { CreateWalletDto, FundWalletDto } from './dto/create-wallet.dto';
-import { User } from '@prisma/client';
-import { PaystackConfigService } from 'src/paystack/PaystackConfigService';
+import { PaystackConfigService } from '../paystack/PaystackConfigService';
 @Injectable()
 export class WalletService {
   constructor(
@@ -25,10 +15,22 @@ export class WalletService {
   async createWallet(id: string, walletDto: CreateWalletDto) {
     try {
       const currency = walletDto.currency;
+      const wallets = await this.prismaService.wallet.findMany({
+        where: { userId: id },
+      });
+
+      const isExist = wallets.find((wallet) => wallet.name === walletDto.name);
+      if (isExist) {
+        throw new HttpException(
+          `Wallet with ${walletDto.name} already exists`,
+          HttpStatus.BAD_REQUEST,
+        );
+      }
 
       const wallet = await this.prismaService.wallet.create({
         data: {
           id: uuidv4(),
+          name: walletDto.name,
           currency,
           userId: id,
         },

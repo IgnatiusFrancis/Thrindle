@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { WalletService } from './wallet.service';
-import { JwtGuard } from 'src/utils/guards/jwtAuth.guard';
-import { CurrentUser } from 'src/utils/decorators';
+import { JwtGuard } from '../utils/guards/jwtAuth.guard';
+import { CurrentUser } from '../utils/decorators';
 import { User } from '@prisma/client';
 import { CreateWalletDto, FundWalletDto } from './dto/create-wallet.dto';
 

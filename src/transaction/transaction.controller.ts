@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
-import { JwtGuard } from 'src/utils/guards/jwtAuth.guard';
-import { CurrentUser } from 'src/utils/decorators';
+import { JwtGuard } from '../utils/guards/jwtAuth.guard';
+import { CurrentUser } from '../utils/decorators';
 import { User } from '@prisma/client';
 import { TransferDto } from './dto/transaction.dto';
 

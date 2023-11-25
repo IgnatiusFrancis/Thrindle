@@ -1,15 +1,8 @@
-import {
-  ConflictException,
-  HttpException,
-  HttpStatus,
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { PrismaService } from 'src/utils/prisma';
+import { PrismaService } from '../utils/prisma';
 import { TransferDto } from './dto/transaction.dto';
 import { Status } from './interface/enum';
 

@@ -6,7 +6,6 @@ import {
   CreateTransferRecipientDto,
 } from './dto/create-payment.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
-import { PaystackConfigService } from 'src/paystack/PaystackConfigService';
 import { InjectPaystack } from 'nestjs-paystack';
 import axios, { AxiosResponse } from 'axios';
 import { ConfigService } from '@nestjs/config';

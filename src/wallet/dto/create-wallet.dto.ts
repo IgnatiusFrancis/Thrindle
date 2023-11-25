@@ -10,6 +10,10 @@ export class CreateWalletDto {
   @IsString()
   @IsNotEmpty()
   currency: string;
+
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 }
 
 export class FundWalletDto {
