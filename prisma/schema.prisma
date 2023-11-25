@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id
+  email        String        @unique
+  password     String
+  wallets      Wallet[]
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Wallet {
+  id                   String        @id
+  currency             String
+  balance              Float         @default(0)
+  user                 User          @relation(fields: [userId], references: [id])
+  userId               String
+  sentTransactions     Transaction[] @relation("FromWallet")
+  receivedTransactions Transaction[] @relation("ToWallet")
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+}
+
+model Transaction {
+  id               String   @id
+  amount           Float    @default(0)
+  senderWallet     Wallet   @relation("FromWallet", fields: [senderWalletId], references: [id])
+  senderWalletId   String
+  recieverWallet   Wallet   @relation("ToWallet", fields: [recieverWalletId], references: [id])
+  recieverWalletId String
+  approvedById     String?
+  user             User     @relation(fields: [userId], references: [id])
+  userId           String
+  status           String   @default("APPROVED")
+  createdAt        DateTime @default(now())
+}
+
+model PaymentDetails {
+  id             String   @id
+  createdAt      DateTime @default(now())
+  walletId       String
+  userId         String
+  currency       String
+  amount         Float
+  paystackId     Float
+  WalletBallance Float
+}
+
+model PaymentSummary {
+  id                 Int      @id @default(autoincrement())
+  month              Int
+  year               Int
+  totalPayments      Int
+  successfulPayments Int
+  pendingPayments    Int
+  createdAt          DateTime @default(now())
+}
