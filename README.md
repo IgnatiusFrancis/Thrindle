@@ -63,7 +63,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-The API will be accessible at http://localhost:8888.
+The API will be accessible at https://wallet-jmm3.onrender.com
 
 ## API Endpoints
 
