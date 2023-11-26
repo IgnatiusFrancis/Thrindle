@@ -56,7 +56,7 @@ Create a Book
 
 Method: Post
 Response: For more details, please refer to the API documentation at the following URL:
-[API Documentation](https://www.postman.com/ignatiusfrancis/workspace/book-collection-api/collection/19595090-1634b028-85e2-4b8f-aa51-f20538897a5c?action=share&creator=19595090)
+[API Documentation]([https://www.postman.com/ignatiusfrancis/workspace/book-collection-api/collection/19595090-1634b028-85e2-4b8f-aa51-f20538897a5c?action=share&creator=19595090](https://documenter.getpostman.com/view/19595090/2s9YeD9Dox))
 
 Get All Books
 
