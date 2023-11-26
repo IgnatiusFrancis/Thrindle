@@ -6,12 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id           String        @id
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
   email        String        @unique
   password     String
   wallets      Wallet[]
@@ -21,12 +21,12 @@ model User {
 }
 
 model Wallet {
-  id                   String        @id
+  id                   String        @id @default(auto()) @map("_id") @db.ObjectId
   name                 String
   currency             String
   balance              Float         @default(0)
   user                 User          @relation(fields: [userId], references: [id])
-  userId               String
+  userId               String        @db.ObjectId
   sentTransactions     Transaction[] @relation("FromWallet")
   receivedTransactions Transaction[] @relation("ToWallet")
   createdAt            DateTime      @default(now())
@@ -34,21 +34,21 @@ model Wallet {
 }
 
 model Transaction {
-  id               String   @id
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
   amount           Float    @default(0)
   senderWallet     Wallet   @relation("FromWallet", fields: [senderWalletId], references: [id])
-  senderWalletId   String
+  senderWalletId   String   @db.ObjectId
   recieverWallet   Wallet   @relation("ToWallet", fields: [recieverWalletId], references: [id])
-  recieverWalletId String
+  recieverWalletId String   @db.ObjectId
   approvedById     String?
   user             User     @relation(fields: [userId], references: [id])
-  userId           String
+  userId           String   @db.ObjectId
   status           String   @default("APPROVED")
   createdAt        DateTime @default(now())
 }
 
 model PaymentDetails {
-  id             String   @id
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt      DateTime @default(now())
   walletId       String
   userId         String
@@ -59,7 +59,7 @@ model PaymentDetails {
 }
 
 model PaymentSummary {
-  id                 Int      @id @default(autoincrement())
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
   month              Int
   year               Int
   totalPayments      Int

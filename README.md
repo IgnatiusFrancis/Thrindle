@@ -29,7 +29,7 @@ Welcome to the Wallet System API documentation. This API facilitates the managem
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/IgnatiusFrancis/WalletSystem.git
+   git clone https://github.com/IgnatiusFrancis/Thrindle.git
    cd WalletSystem
 
    # Install dependencies:
@@ -41,8 +41,9 @@ Welcome to the Wallet System API documentation. This API facilitates the managem
 Create a .env file in the root directory and configure the following environment variables:
 
 ```env
-PAYSTACK_API_KEY=your_paystack_api_key
-DATABASE_URL=postgresql://username:password@localhost:5432/dbname
+TEST_SECRET=your_paystack_api_key
+JWT_SECRET=your secret key
+DATABASE_URL=mongodb+srv://<username>:<password>@cluster0.3lx6pbq.mongodb.net/dbname
 ```
 
 # Usage
@@ -62,7 +63,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-The API will be accessible at http://localhost:3000.
+The API will be accessible at http://localhost:8888.
 
 ## API Endpoints
 
@@ -71,35 +72,67 @@ The API will be accessible at http://localhost:3000.
 - **URL**: /auth/signup
 - **Method**: POST
 - **Request Body**: `{ "email": "user@example.com", "password": "your_password" }`
-- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/12345678/your-api-documentation-url)
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/19595090/2s9YeD9Dox)
 
 ### Sign In
 
 - **URL**: /auth/signin
 - **Method**: POST
 - **Request Body**: `{ "email": "user@example.com", "password": "your_password" }`
-- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/12345678/your-api-documentation-url)
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/19595090/2s9YeD9Dox)
 
 ### Create Wallet
 
 - **URL**: /wallet/create
 - **Method**: POST
 - **Request Body**: `{ "currency": "NGN", "name": "James" }`
-- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/12345678/your-api-documentation-url)
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/19595090/2s9YeD9Dox)
 
 ### Fund Wallet
 
-- **URL**: /wallet/fund
-- **Method**: POST
+- **URL**: /wallet/:walletId
+- **Method**: PATCH
 - **Request Body**: `{ "walletId": "your_wallet_id", "amount": "500" }`
-- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/12345678/your-api-documentation-url)
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/19595090/2s9YeD9Dox)
 
-### Transfer
+### VERIFY Wallet PAYMENT
 
-- **URL**: /transfer
+- **URL**: /wallet/verify/:reference
+- **Method**: GET
+- **Request Body**: `{ "reference": "your_transfer_reference" }`
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/19595090/2s9YeD9Dox)
+
+### GET Wallet
+
+- **URL**: /wallet/:walletId
+- **Method**: GET
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/19595090/2s9YeD9Dox)
+
+### Wallet To Wallet Transfer
+
+- **URL**: /transfer/:walletId
 - **Method**: POST
 - **Request Body**: `{ "senderWalletId": "sender_wallet_id", "receiverWalletId": "receiver_wallet_id", "amount": "300" }`
-- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/12345678/your-api-documentation-url)
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/19595090/2s9YeD9Dox)
+
+### Wallet To Banks Transfer
+
+- **URL**: /transfer/bank/:walletId
+- **Method**: POST
+- **Request Body**: `{CreateTransferRecipientDto }`
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/19595090/2s9YeD9Dox)
+
+### Get All Transactions
+
+- **URL**: /transfer/transactions
+- **Method**: GET
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/19595090/2s9YeD9Dox)
+
+### Get Transaction By Transaction ID
+
+- **URL**: /transfer/:txnId
+- **Method**: GET
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/19595090/2s9YeD9Dox)
 
 ...
 
@@ -107,7 +140,7 @@ The API will be accessible at http://localhost:3000.
 
 ```bash
 # unit tests
-$ npm run test
+$ npm run test auth.service.spec.ts
 
 # e2e tests
 $ npm run test:e2e
@@ -131,4 +164,4 @@ $ npm run test:e2e
 
 ...
 
-Feel free to explore the API and refer to the [API Documentation](https://documenter.getpostman.com/view/12345678/your-api-documentation-url) for detailed information on each endpoint and their functionalities.
+Feel free to explore the API and refer to the [API Documentation](https://documenter.getpostman.com/view/19595090/2s9YeD9Dox) for detailed information on each endpoint and their functionalities.
