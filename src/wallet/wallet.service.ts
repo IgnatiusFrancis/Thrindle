@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-
-import { v4 as uuidv4 } from 'uuid';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { PrismaService } from '../utils/prisma';
 import { CreateWalletDto, FundWalletDto } from './dto/create-wallet.dto';
@@ -29,7 +27,6 @@ export class WalletService {
 
       const wallet = await this.prismaService.wallet.create({
         data: {
-          id: uuidv4(),
           name: walletDto.name,
           currency,
           userId: id,
@@ -117,7 +114,6 @@ export class WalletService {
 
         const paymentDetails = await this.prismaService.paymentDetails.create({
           data: {
-            id: uuidv4(),
             WalletBallance: balance,
             amount: Number(amount),
             userId: id,

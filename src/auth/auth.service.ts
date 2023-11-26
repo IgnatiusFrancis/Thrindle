@@ -1,6 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
-import { v4 as uuidv4 } from 'uuid';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { JwtAuthService } from '../utils/token.generators';
 import { PrismaService } from '../utils/prisma';
@@ -66,10 +65,8 @@ export class AuthService {
   }
 
   private async createUser(email: string, password: string) {
-    const id = uuidv4();
     return this.prismaService.user.create({
       data: {
-        id,
         email,
         password,
       },

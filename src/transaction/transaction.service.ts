@@ -1,8 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import axios, { AxiosResponse } from 'axios';
-
-import { v4 as uuidv4 } from 'uuid';
-
 import { PrismaService } from '../utils/prisma';
 import {
   CreatePaymentDto,
@@ -75,6 +72,7 @@ export class TransactionService {
       });
 
       const recieverBalance = Math.floor(recieverWallet.balance + amount);
+      console.log(recieverBalance);
 
       await this.prismaService.wallet.update({
         where: {
@@ -87,7 +85,6 @@ export class TransactionService {
 
       const approvedTransaction = await this.prismaService.transaction.create({
         data: {
-          id: uuidv4(),
           senderWalletId,
           recieverWalletId,
           amount,
@@ -181,7 +178,20 @@ export class TransactionService {
         },
       });
 
-      return { ...res.data, myWalletBallance: senderBalance };
+      // const approvedTransaction = await this.prismaService.transaction.create({
+      //   data: {
+      //     senderWalletId,
+      //     recieverWalletId: '',
+      //     amount,
+      //     userId: id,
+      //   },
+      // });
+
+      return {
+        ...res.data,
+
+        myWalletBallance: senderBalance,
+      };
     } catch (error) {
       console.log(error.message);
       throw new HttpException(

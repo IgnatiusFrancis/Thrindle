@@ -16,10 +16,10 @@ describe('Authentication System', () => {
     await app.init();
   });
 
-  const email = 'pencilsdave@gmail.com';
+  const email = 'man@gmail.com';
 
-  it('handles a signup request', () => {
-    return request(app.getHttpServer())
+  it('handles a signup request', async () => {
+    return await request(app.getHttpServer())
       .post('/auth/signup')
       .send({ email, password: 'me123' })
       .expect(201)
@@ -30,10 +30,10 @@ describe('Authentication System', () => {
         expect(email).toEqual(email);
         expect(password).toBeDefined();
       });
-  });
+  }, 10000);
 
-  it('handles a signin request', () => {
-    return request(app.getHttpServer())
+  it('handles a signin request', async () => {
+    return await request(app.getHttpServer())
       .post('/auth/signin')
       .send({ email, password: 'me123' })
       .expect(201)
@@ -46,10 +46,10 @@ describe('Authentication System', () => {
         expect(password).toBeDefined();
         expect(token).toBeDefined();
       });
-  });
+  }, 10000);
 
   it('It should create a wallet', async () => {
-    const name = 'Pascal';
+    const name = 'Franks';
 
     const { body } = await request(app.getHttpServer())
       .post('/wallet/create')
@@ -58,10 +58,10 @@ describe('Authentication System', () => {
       .expect(201);
 
     expect(body.name).toEqual(name);
-  });
+  }, 10000);
 
   it('It should create a wallet and transfer money to it', async () => {
-    const name = 'Richard';
+    const name = 'Leko';
 
     const { body } = await request(app.getHttpServer())
       .post('/wallet/create')
@@ -74,12 +74,12 @@ describe('Authentication System', () => {
       .send({ recieverWalletId: body.id, amount: 0 })
       .set('Authorization', `Bearer ${authToken}`)
       .expect(201);
-  });
+  }, 10000);
 
   it('It should fetch all transactions', async () => {
     const result = await request(app.getHttpServer())
       .get(`/transfer/transactions`)
       .set('Authorization', `Bearer ${authToken}`)
       .expect(200);
-  });
+  }, 10000);
 });

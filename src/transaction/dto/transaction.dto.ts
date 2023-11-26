@@ -44,9 +44,9 @@ export class CreateTransferRecipientDto {
   @IsString()
   reason?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  recipient: string;
+  recipient?: string;
 
   @IsNumber()
   @IsNotEmpty()
