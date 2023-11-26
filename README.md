@@ -1,6 +1,6 @@
-# Book CRUD Operations API
+# Wallet System API Documentation
 
-Welcome to the Book CRUD Operations API documentation. This API allows you to manage books and their information using Prisma and PostgreSQL. Below are the steps to set up, run, and test the API.
+Welcome to the Wallet System API documentation. This API facilitates the management of user wallets and transactions using Paystack integration. Below, you will find information on setting up, running, and testing the API.
 
 ## Table of Contents
 
@@ -18,116 +18,38 @@ Welcome to the Book CRUD Operations API documentation. This API allows you to ma
 # Prerequisites
 
 - Nestjs
+- Express
+- TypeScript
+- Paystack API
+- Prisma
 - PostgreSQL database
 
-#Installation
+# Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/IgnatiusFrancis/BookCollection.git
-   cd BookCollection
-   cd books
+   git clone https://github.com/IgnatiusFrancis/WalletSystem.git
+   cd WalletSystem
 
-   #Install dependencies:
+   # Install dependencies:
    npm install
-
    ```
 
 # Configuration
 
 Create a .env file in the root directory and configure the following environment variables:
+
+```env
+PAYSTACK_API_KEY=your_paystack_api_key
 DATABASE_URL=postgresql://username:password@localhost:5432/dbname
+```
 
 # Usage
 
-# Starting the Server
+## Starting the Server
 
 To start the API server, run the following command:
-npm start or npm run start
-
-The API will be accessible at http://localhost:6000.
-
-# api-endpoints
-
-Create a Book
-
-    URL: /books
-
-Method: Post
-Response: For more details, please refer to the API documentation at the following URL:
-[API Documentation](https://www.postman.com/ignatiusfrancis/workspace/book-collection-api/collection/19595090-1634b028-85e2-4b8f-aa51-f20538897a5c?action=share&creator=19595090)
-
-Get All Books
-
-URL: /books
-Method: GET
-Response: For more details, please refer to the API documentation at the following URL:
-[API Documentation](https://www.postman.com/ignatiusfrancis/workspace/book-collection-api/collection/19595090-1634b028-85e2-4b8f-aa51-f20538897a5c?action=share&creator=19595090)
-
-Get a Book by ID
-
-    URL: /books/:id
-
-Method: GET
-Response: For more details, please refer to the API documentation at the following URL:
-[API Documentation](https://www.postman.com/ignatiusfrancis/workspace/book-collection-api/collection/19595090-1634b028-85e2-4b8f-aa51-f20538897a5c?action=share&creator=19595090)
-
-Update a Book
-
-    URL: /books/:id
-    Method: PUT
-
-Response: For more details, please refer to the API documentation at the following URL:
-[API Documentation](https://www.postman.com/ignatiusfrancis/workspace/book-collection-api/collection/19595090-1634b028-85e2-4b8f-aa51-f20538897a5c?action=share&creator=19595090)
-
-Delete a Book
-
-    URL: /books/:id
-    Method: DELETE
-
-Response: For more details, please refer to the API documentation at the following URL:
-[API Documentation](https://www.postman.com/ignatiusfrancis/workspace/book-collection-api/collection/19595090-1634b028-85e2-4b8f-aa51-f20538897a5c?action=share&creator=19595090)
-
-    Response: Detailed response information is available in the [View API Documentation](https://www.postman.com/ignatiusfrancis/workspace/book-collection-api/collection/19595090-1634b028-85e2-4b8f-aa51-f20538897a5c?action=share&creator=19595090)
-
-.
-
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
-```bash
-$ npm install
-```
-
-## Running the app
 
 ```bash
 # development
@@ -140,7 +62,48 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+The API will be accessible at http://localhost:3000.
+
+## API Endpoints
+
+### Sign Up
+
+- **URL**: /auth/signup
+- **Method**: POST
+- **Request Body**: `{ "email": "user@example.com", "password": "your_password" }`
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/12345678/your-api-documentation-url)
+
+### Sign In
+
+- **URL**: /auth/signin
+- **Method**: POST
+- **Request Body**: `{ "email": "user@example.com", "password": "your_password" }`
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/12345678/your-api-documentation-url)
+
+### Create Wallet
+
+- **URL**: /wallet/create
+- **Method**: POST
+- **Request Body**: `{ "currency": "NGN", "name": "James" }`
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/12345678/your-api-documentation-url)
+
+### Fund Wallet
+
+- **URL**: /wallet/fund
+- **Method**: POST
+- **Request Body**: `{ "walletId": "your_wallet_id", "amount": "500" }`
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/12345678/your-api-documentation-url)
+
+### Transfer
+
+- **URL**: /transfer
+- **Method**: POST
+- **Request Body**: `{ "senderWalletId": "sender_wallet_id", "receiverWalletId": "receiver_wallet_id", "amount": "300" }`
+- **Response**: Detailed response information is available in the [API Documentation](https://documenter.getpostman.com/view/12345678/your-api-documentation-url)
+
+...
+
+## Testing
 
 ```bash
 # unit tests
@@ -148,21 +111,24 @@ $ npm run test
 
 # e2e tests
 $ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
-## Support
+...
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
 
-## Stay in touch
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Contributing
+
+...
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+...
+
+## Contact
+
+...
+
+Feel free to explore the API and refer to the [API Documentation](https://documenter.getpostman.com/view/12345678/your-api-documentation-url) for detailed information on each endpoint and their functionalities.
