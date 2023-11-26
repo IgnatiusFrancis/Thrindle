@@ -3,7 +3,7 @@ import { TransactionService } from './transaction.service';
 import { JwtGuard } from '../utils/guards/jwtAuth.guard';
 import { CurrentUser } from '../utils/decorators';
 import { User } from '@prisma/client';
-import { TransferDto } from './dto/transaction.dto';
+import { CreateTransferRecipientDto, TransferDto } from './dto/transaction.dto';
 
 @Controller('transfer')
 @UseGuards(JwtGuard)
@@ -16,10 +16,23 @@ export class TransactionController {
     @Param('walletId') senderWalletId: string,
     @Body() transferDto: TransferDto,
   ) {
-    return await this.transactionService.transfer(
+    return await this.transactionService.walletToWallet(
       user.id,
       senderWalletId,
       transferDto,
+    );
+  }
+
+  @Post('bank/:walletId')
+  async walletToOthers(
+    @CurrentUser() user: User,
+    @Param('walletId') senderWalletId: string,
+    @Body() createTransferRecipientDto: CreateTransferRecipientDto,
+  ) {
+    return await this.transactionService.walletToOthers(
+      user.id,
+      senderWalletId,
+      createTransferRecipientDto,
     );
   }
 

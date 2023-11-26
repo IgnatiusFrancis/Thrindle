@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from './utils';
-import { PaymentModule } from './payment/payment.module';
 import { PaystackConfigService } from './paystack/PaystackConfigService';
 import { PaystackConfigModule } from './paystack/PaystackConfigModule';
 import { PaystackModule } from 'nestjs-paystack';
@@ -17,7 +16,6 @@ import { TransactionModule } from './transaction/transaction.module';
 @Module({
   imports: [
     ConfigModule,
-    PaymentModule,
     PaystackConfigModule,
     AuthModule,
     WalletModule,

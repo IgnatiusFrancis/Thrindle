@@ -46,6 +46,7 @@ export class AuthService {
     const user = await this.getUserByEmail(email);
 
     this.checkUserExistence(user);
+
     await this.checkPasswordMatch(password, user.password);
 
     return user;

@@ -5,6 +5,7 @@ import { AppModule } from './../src/app.module';
 
 describe('Authentication System', () => {
   let app: INestApplication;
+  let authToken: string;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -15,7 +16,7 @@ describe('Authentication System', () => {
     await app.init();
   });
 
-  const email = 'test@gmail.com';
+  const email = 'pencilsdave@gmail.com';
 
   it('handles a signup request', () => {
     return request(app.getHttpServer())
@@ -39,11 +40,46 @@ describe('Authentication System', () => {
       .then((res) => {
         const { id, email, password } = res.body.result.user;
         const { token } = res.body.result;
-
+        authToken = token;
         expect(id).toBeDefined();
         expect(email).toEqual(email);
         expect(password).toBeDefined();
         expect(token).toBeDefined();
       });
+  });
+
+  it('It should create a wallet', async () => {
+    const name = 'Pascal';
+
+    const { body } = await request(app.getHttpServer())
+      .post('/wallet/create')
+      .send({ currency: 'NGN', name })
+      .set('Authorization', `Bearer ${authToken}`)
+      .expect(201);
+
+    expect(body.name).toEqual(name);
+  });
+
+  it('It should create a wallet and transfer money to it', async () => {
+    const name = 'Richard';
+
+    const { body } = await request(app.getHttpServer())
+      .post('/wallet/create')
+      .send({ currency: 'NGN', name })
+      .set('Authorization', `Bearer ${authToken}`)
+      .expect(201);
+
+    const result = await request(app.getHttpServer())
+      .post(`/transfer/${body.id}`)
+      .send({ recieverWalletId: body.id, amount: 0 })
+      .set('Authorization', `Bearer ${authToken}`)
+      .expect(201);
+  });
+
+  it('It should fetch all transactions', async () => {
+    const result = await request(app.getHttpServer())
+      .get(`/transfer/transactions`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .expect(200);
   });
 });
